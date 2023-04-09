@@ -7,11 +7,6 @@ import {
   FlatList
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
-
 export const Display = ({name, age}) => {
   return (
     <View style={SS.container}>
