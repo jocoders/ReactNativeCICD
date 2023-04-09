@@ -13,8 +13,6 @@ import {
 
 
 export const Display = ({name, age}) => {
-  console.log('XDATA_NEW_RENDER_INITIALIZATION', new Date())
-
   return (
     <View style={SS.container}>
       <Text>{name}</Text>
