@@ -5,7 +5,7 @@ import {
   Text,
 } from 'react-native';
 
-export const Display = ({name, age}) => {
+export const Display1 = ({name, age}) => {
   return (
     <View style={SS.container}>
       <Text>{name}</Text>
