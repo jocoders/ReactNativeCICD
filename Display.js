@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   StyleSheet,
-  useColorScheme,
   View,
   Text,
-  FlatList
 } from 'react-native';
 
 export const Display = ({name, age}) => {
