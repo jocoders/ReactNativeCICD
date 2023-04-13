@@ -5,9 +5,10 @@ import {
   Text,
 } from 'react-native';
 
-export const Display = ({name, age}) => {
+export const Text = ({name, age}) => {
   return (
     <View style={SS.container}>
+      <Text>{name}</Text>
       <Text>{name}</Text>
       <Text>{age}</Text>
     </View>
