@@ -1,44 +1,32 @@
-import React, { useMemo, useState } from "react";
-import {
-  StyleSheet,
-  useColorScheme,
-  View,
-  FlatList,
-  TouchableOpacity, Text,
-} from "react-native";
-
-import {
-  Colors,
-} from "react-native/Libraries/NewAppScreen";
-import { Display } from "./Display";
-
+import React, {useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
+import Crashes from 'appcenter-crashes';
+import Analytics from 'appcenter-analytics';
+import {Basic} from './src/Basic';
 
 const App = () => {
-  const [active, setActive] = useState(false);
-  const [name, setName] = useState('Jo')
-  const [age, setAge] = useState(37)
+  const checkPreviousSession = async () => {
+    const didCrash = Crashes.hasCrashedInLastSession();
+    if (didCrash) {
+      const report = await Crashes.lastSessionCrashReport();
+      alert('Sorry about that crash');
+      console.log('report', report);
+    }
+  };
 
-  const memoObj = useMemo(() => {
-    return { name: "Jo", age: 37 };
+  useEffect(() => {
+    checkPreviousSession().then();
   }, []);
-
-  const memoObj1 = () => {
-    return { name: "Jo", age: 37 };
-  }
-
-
-  const onPress = () => {
-    setActive(prev => !prev);
-  }
-
+  const onPress = async () => {
+    await Analytics.trackEvent('Calculate', {
+      Internet: 'WiFi',
+      Gps: 'Off',
+    });
+  };
 
   return (
     <View style={SS.container}>
-      <TouchableOpacity onPress={onPress}>
-        <Text>{'Change activity'}</Text>
-      </TouchableOpacity>
-      <Text>{`This is the current activity value: ${active}`}</Text>
-      <Display name={name} age={age} />
+      <Basic />
     </View>
   );
 };
@@ -46,9 +34,9 @@ const App = () => {
 const SS = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "pink",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: 'pink',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
